@@ -54,6 +54,24 @@
     });
   });
 
+  /* ---------- clean address bar: no index.html, .html or #section ---------- */
+  function cleanUrl() {
+    if (location.protocol === 'file:' || !window.history || !history.replaceState) return;
+    var p = location.pathname.replace(/index\.html$/, '').replace(/\.html$/, '');
+    if (p !== location.pathname || location.hash) history.replaceState(null, '', p + location.search);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var id = a.getAttribute('href').slice(1);
+    var t = id && document.getElementById(id);
+    if (!t) return;
+    e.preventDefault();
+    if (id === 'top') window.scrollTo(0, 0); else t.scrollIntoView();
+    cleanUrl();
+  });
+  window.addEventListener('load', function () { setTimeout(cleanUrl, 50); });
+
   /* ---------- active tab while reading ---------- */
   var tabLinks = Array.prototype.slice.call(document.querySelectorAll('.tabs a[href^="#"]'));
   if (tabLinks.length && 'IntersectionObserver' in window) {
