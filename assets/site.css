@@ -211,7 +211,6 @@ button { font: inherit; color: inherit; }
 .about-main { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
 .about-main img { width: 140px; height: 160px; object-fit: cover; border-radius: 16px; }
 .about-main p { flex: 1 1 300px; margin: 0; font-size: 18px; line-height: 1.6; }
-.about-main p span { color: var(--muted); }
 
 /* ---------- experience ---------- */
 .xp { border-top: 1px solid var(--hair); padding: 22px 0; display: flex; gap: 24px; flex-wrap: wrap; }
